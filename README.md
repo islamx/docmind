@@ -2,7 +2,7 @@
 
 Ask any public GitHub repo or docs folder. Get answers with citations to the exact lines.
 
-**Live demo: https://docmind.islamz.me**
+**Live demo: https://docmind-islamx.vercel.app**
 
 Indexing and search run in your browser. Only answer generation calls a server, and the app works without it.
 
