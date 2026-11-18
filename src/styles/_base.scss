@@ -160,7 +160,9 @@ pre {
   }
 }
 
-.visually-hidden {
+/* .cdk-visually-hidden: LiveAnnouncer's host element, whose own CSS is not bundled */
+.visually-hidden,
+.cdk-visually-hidden {
   position: absolute !important;
   inline-size: 1px;
   block-size: 1px;
