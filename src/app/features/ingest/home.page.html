@@ -1,0 +1,58 @@
+<div class="page">
+  <section class="hero">
+    <h1>{{ 'home.title' | t }}</h1>
+    <p class="lead">{{ 'home.subtitle' | t }}</p>
+
+    <form class="form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <label class="label" for="repo">{{ 'home.input.label' | t }}</label>
+      <div class="row">
+        <input
+          id="repo"
+          class="input"
+          type="text"
+          formControlName="repo"
+          autocomplete="off"
+          spellcheck="false"
+          dir="ltr"
+          [placeholder]="'home.input.placeholder' | t"
+          [attr.aria-invalid]="showInvalid()"
+          aria-describedby="repo-hint"
+        />
+        <button class="btn" type="submit" [disabled]="ingest.isPending()">{{ 'home.submit' | t }}</button>
+      </div>
+      @if (showInvalid()) {
+        <p class="error" role="alert">{{ 'form.invalid' | t }}</p>
+      } @else {
+        <p id="repo-hint" class="hint">{{ 'home.input.hint' | t }}</p>
+      }
+    </form>
+
+    <div class="examples">
+      <span class="hint">{{ 'home.examples' | t }}</span>
+      @for (example of examples; track example.value) {
+        <button type="button" class="chip" [disabled]="ingest.isPending()" (click)="useExample(example.value)">
+          {{ example.label }}
+        </button>
+      }
+    </div>
+  </section>
+
+  @if (errorKey(); as key) {
+    <p class="error banner" role="alert">{{ key | t }}</p>
+  }
+
+  @if (showProgress()) {
+    <app-ingest-progress />
+  }
+
+  <section class="library" aria-labelledby="lib-title">
+    <h2 id="lib-title">{{ 'home.library' | t }}</h2>
+    @if (library.isEmpty()) {
+      <p class="hint">{{ 'home.library.empty' | t }}</p>
+    } @else {
+      <app-source-list [sources]="library.sources()" (remove)="library.remove($event)" />
+    }
+  </section>
+
+  <p class="hint privacy">{{ 'home.privacy' | t }}</p>
+</div>

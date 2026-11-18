@@ -1,0 +1,85 @@
+<div class="layout">
+  <aside class="rail" [attr.aria-label]="'chat.files' | t">
+    <h2>{{ 'chat.files' | t }} <span class="count">{{ files().length }}</span></h2>
+    <app-file-list [paths]="files()" (picked)="openFile($event)" />
+  </aside>
+
+  <section class="conversation">
+    <header class="head">
+      <a class="back" routerLink="/">← {{ 'chat.back' | t }}</a>
+      <div class="title">
+        <h1>{{ source().owner }}/{{ source().repo }}</h1>
+        @if (source().path) {
+          <code>{{ source().path }}</code>
+        }
+      </div>
+      <span [class]="'badge ' + semanticStatus()">
+        @switch (semanticStatus()) {
+          @case ('loading') {
+            {{ 'ingest.embedding' | t }} {{ (embedder.progress() * 100).toFixed(0) }}%
+          }
+          @case ('keyword') {
+            {{ 'source.status.partial' | t }}
+          }
+          @default {
+            {{ 'source.status.ready' | t }}
+          }
+        }
+      </span>
+      <button type="button" class="btn ghost small panel-toggle" (click)="showPanel.set(!showPanel())">
+        {{ 'chat.sources' | t }}
+      </button>
+    </header>
+
+    <div class="log" role="log" aria-live="polite" aria-relevant="additions text">
+      @if (!chat.hasMessages()) {
+        <div class="empty">
+          <h2>{{ 'chat.empty.title' | t: { name: displayName() } }}</h2>
+          <p class="hint">{{ 'chat.empty.hint' | t }}</p>
+          <div class="examples">
+            @for (key of examples; track key) {
+              <button type="button" class="chip" (click)="ask(exampleText(key))">{{ key | t }}</button>
+            }
+          </div>
+        </div>
+      }
+      @for (message of chat.messages(); track message.id) {
+        <app-message [message]="message" (cite)="openCitation($event)" (followUp)="ask($event)" />
+      }
+    </div>
+
+    <div class="dock">
+      <app-composer [(value)]="draft" [busy]="chat.isBusy()" (send)="ask($event)" (stop)="chat.stop()" />
+    </div>
+  </section>
+
+  <aside class="rail sources" [class.open]="showPanel()" [attr.aria-label]="'chat.sources' | t">
+    <h2>{{ 'chat.sources' | t }}</h2>
+
+    @defer (when selected() !== null) {
+      @if (selected(); as chunk) {
+        <app-source-viewer [chunk]="chunk" [githubUrl]="githubUrl()" (closed)="selected.set(null)" />
+      }
+    }
+
+    @if (chat.latestCitations().length === 0) {
+      <p class="hint">{{ 'chat.sources.none' | t }}</p>
+    } @else {
+      <ol class="cites">
+        @for (c of chat.latestCitations(); track c.n) {
+          <li>
+            <button type="button" class="cite" [class.active]="selected()?.id === c.chunk.id" (click)="selected.set(c.chunk)">
+              <span class="n">{{ c.n }}</span>
+              <span class="body">
+                <span class="path">{{ c.chunk.path }}</span>
+                @if (c.chunk.heading) {
+                  <span class="h">{{ c.chunk.heading }}</span>
+                }
+              </span>
+            </button>
+          </li>
+        }
+      </ol>
+    }
+  </aside>
+</div>

@@ -1,0 +1,37 @@
+<section class="panel" aria-live="polite" aria-busy="{{ store.isPending() }}">
+  <ol class="steps">
+    @for (step of steps(); track step.phase) {
+      <li [class]="'step ' + step.state">
+        <span class="dot" aria-hidden="true">{{ step.state === 'done' ? '✓' : '' }}</span>
+        <span class="label">{{ step.label | t }}</span>
+        @if (step.state === 'active') {
+          @if (percent() !== null) {
+            <span class="pct">{{ percent() }}%</span>
+          } @else if (step.phase === 'chunking') {
+            <span class="pct">{{ store.chunks() }} {{ 'ingest.passages' | t }}</span>
+          }
+        }
+      </li>
+    }
+  </ol>
+
+  @if (percent() !== null) {
+    <progress class="bar" max="100" [value]="percent()"></progress>
+  }
+
+  @if (store.canChat() && link(); as chat) {
+    @if (!store.isFinished()) {
+      <p class="note">{{ 'ingest.searchable' | t }}</p>
+    }
+    <div class="actions">
+      <a class="btn" [routerLink]="chat.commands" [queryParams]="chat.queryParams">{{ 'ingest.open' | t }}</a>
+      @if (store.isPending()) {
+        <button type="button" class="btn ghost" (click)="store.cancel()">{{ 'ingest.cancel' | t }}</button>
+      }
+    </div>
+  } @else if (store.isPending()) {
+    <div class="actions">
+      <button type="button" class="btn ghost" (click)="store.cancel()">{{ 'ingest.cancel' | t }}</button>
+    </div>
+  }
+</section>

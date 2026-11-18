@@ -1,0 +1,36 @@
+<article [class]="'msg ' + message().role" [attr.aria-busy]="message().status === 'streaming'">
+  @if (!isAssistant()) {
+    <p class="user-text">{{ message().text }}</p>
+  } @else {
+    @if (waiting()) {
+      <p class="muted pulse">{{ 'chat.retrieving' | t }}</p>
+    }
+
+    @if (message().text) {
+      <div
+        class="prose answer"
+        [class.streaming]="message().status === 'streaming'"
+        [innerHTML]="message().text | markdown: message().citations.length"
+        (appCiteClick)="cite.emit($event)"
+      ></div>
+    }
+
+    @if (message().mode === 'extractive' && message().text) {
+      <p class="notice">{{ 'chat.mode.extractive' | t }}</p>
+    }
+    @if (showConfidence()) {
+      <p class="notice warn">{{ confidenceKey()! | t }}</p>
+    }
+
+    @if (message().status === 'done' && message().text) {
+      <div class="foot">
+        <button type="button" class="btn ghost small" (click)="copy()">
+          {{ copied() ? ('chat.copied' | t) : ('chat.copy' | t) }}
+        </button>
+        @for (q of message().followUps; track q) {
+          <button type="button" class="chip" (click)="followUp.emit(q)">{{ q }}</button>
+        }
+      </div>
+    }
+  }
+</article>

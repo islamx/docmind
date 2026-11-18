@@ -12,8 +12,8 @@ export function buildExtractiveAnswer(citations: readonly Citation[]): string {
   return citations
     .slice(0, MAX_PASSAGES)
     .map(({ n, chunk }) => {
-      const text =
-        chunk.text.length > MAX_PASSAGE_CHARS ? `${chunk.text.slice(0, MAX_PASSAGE_CHARS).trimEnd()}…` : chunk.text;
+      const body = chunk.text.replace(/^#{1,6}\s.*\n+/, ''); // the title is shown separately
+      const text = body.length > MAX_PASSAGE_CHARS ? `${body.slice(0, MAX_PASSAGE_CHARS).trimEnd()}…` : body;
       const title = chunk.heading || chunk.path;
       return `**${title}** [${n}]\n\n${text}`;
     })
