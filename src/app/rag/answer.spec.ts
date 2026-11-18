@@ -1,4 +1,4 @@
-import { citedNumbers, linkifyCitations, parseCiteHref, toCitations } from './citations';
+import { citedNumbers, linkifyCitations, normalizeCitations, parseCiteHref, toCitations } from './citations';
 import { buildExtractiveAnswer, suggestFollowUps } from './extractive';
 import { blobUrl, parseRepoInput, selectFiles, sourceId } from './github';
 import { Chunk } from './models';
@@ -42,6 +42,11 @@ describe('citations', () => {
     expect(linkifyCitations('see [1] and [7] and [x](http://a)', 3)).toBe(
       'see [\\[1\\]](#cite-1) and [7] and [x](http://a)',
     );
+  });
+  it('normalizes model-specific citation styles', () => {
+    expect(normalizeCitations('A【2†L23-L26】 and B【1】')).toBe('A[2] and B[1]');
+    expect(linkifyCitations('x【2†L1】', 3)).toBe('x[\\[2\\]](#cite-2)');
+    expect(citedNumbers('x【3†L9】', 3)).toEqual([3]);
   });
   it('parses cite hrefs', () => {
     expect(parseCiteHref('#cite-3')).toBe(3);

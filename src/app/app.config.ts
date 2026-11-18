@@ -18,7 +18,12 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
     // Route params, query params and resolver data arrive as component `input()`s.
-    provideRouter(routes, withComponentInputBinding(), withViewTransitions(), withPreloading(PreloadAllModules)),
+    provideRouter(
+      routes,
+      withComponentInputBinding(),
+      withViewTransitions({ skipInitialTransition: true }),
+      withPreloading(PreloadAllModules),
+    ),
     // Order matters: the first interceptor wraps the rest, so GitHub errors are mapped after retries ran.
     provideHttpClient(withFetch(), withInterceptors([githubErrorInterceptor, retryInterceptor])),
     provideChunkRepository(),

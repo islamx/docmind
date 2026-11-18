@@ -72,7 +72,7 @@ Without an API the app answers with extractive passages. To enable generated ans
 |---|---|---|
 | `LLM_API_KEY` | none | Provider key. Unset means extractive mode |
 | `LLM_BASE_URL` | `https://api.groq.com/openai/v1` | Any OpenAI-compatible endpoint |
-| `LLM_MODEL` | `llama-3.3-70b-versatile` | Model id |
+| `LLM_MODEL` | `openai/gpt-oss-120b` | Model id |
 
 Groq and Gemini both have free tiers. Gemini: `https://generativelanguage.googleapis.com/v1beta/openai`.
 

@@ -3,7 +3,7 @@ import { Citation } from './models';
 
 export const SYSTEM_PROMPT = [
   'You answer questions about a software documentation or code repository.',
-  'Use ONLY the numbered context passages. Cite the passages you used with [n] markers, e.g. "Use computed() [2]".',
+  'Use ONLY the numbered context passages. Cite the passages you used with [n] markers, e.g. "Use computed() [2]". Always use plain square brackets, never other bracket styles.',
   'If the context does not contain the answer, say so plainly and do not guess.',
   'Reply in the same language as the question. Keep code identifiers in English. Be concise.',
 ].join(' ');

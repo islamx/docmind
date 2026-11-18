@@ -19,7 +19,7 @@ export function readConfig(env: Record<string, string | undefined>): LlmConfig |
   return {
     apiKey,
     baseUrl: (env['LLM_BASE_URL'] ?? 'https://api.groq.com/openai/v1').replace(/\/+$/, ''),
-    model: env['LLM_MODEL'] ?? 'llama-3.3-70b-versatile',
+    model: env['LLM_MODEL'] ?? 'openai/gpt-oss-120b',
   };
 }
 
@@ -71,7 +71,15 @@ export function buildUpstreamRequest(
     {
       method: 'POST',
       headers: { 'content-type': 'application/json', authorization: `Bearer ${config.apiKey}` },
-      body: JSON.stringify({ model: config.model, messages, stream: true, temperature: 0.2, max_tokens: 700 }),
+      body: JSON.stringify({
+        model: config.model,
+        messages,
+        stream: true,
+        temperature: 0.2,
+        max_tokens: 1500,
+        // Reasoning models spend tokens thinking first; keep that short so answers start fast.
+        ...(config.model.includes('gpt-oss') ? { reasoning_effort: 'low' } : {}),
+      }),
       signal,
     },
   ];
