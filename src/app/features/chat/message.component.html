@@ -1,6 +1,6 @@
 <article [class]="'msg ' + message().role" [attr.aria-busy]="message().status === 'streaming'">
   @if (!isAssistant()) {
-    <p class="user-text">{{ message().text }}</p>
+    <p class="user-text" dir="auto">{{ message().text }}</p>
   } @else {
     @if (waiting()) {
       <p class="muted pulse">{{ 'chat.retrieving' | t }}</p>
@@ -9,6 +9,7 @@
     @if (message().text) {
       <div
         class="prose answer"
+        dir="auto"
         [class.streaming]="message().status === 'streaming'"
         [innerHTML]="message().text | markdown: message().citations.length"
         (appCiteClick)="cite.emit($event)"

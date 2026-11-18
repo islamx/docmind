@@ -56,6 +56,11 @@ describe('extractive fallback', () => {
     expect(answer).toContain('**Topic 1 > Sub 1** [1]');
     expect(answer).toContain('[3]');
   });
+  it('does not repeat the heading already shown as the title', () => {
+    const c = toCitations([{ chunk: chunk(1, '## Computed signals\nBody text of the passage.'), score: 1 }]);
+    expect(buildExtractiveAnswer(c)).not.toContain('## Computed signals');
+    expect(buildExtractiveAnswer(c)).toContain('Body text of the passage.');
+  });
   it('truncates long passages and handles empty input', () => {
     const long = toCitations([{ chunk: chunk(1, 'x'.repeat(2000)), score: 1 }]);
     expect(buildExtractiveAnswer(long).length).toBeLessThan(700);
