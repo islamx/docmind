@@ -72,7 +72,8 @@ export class IndexedDbChunkRepository extends ChunkRepository {
     const tx = db.transaction(['sources', 'chunks'], 'readwrite');
     tx.objectStore('sources').put(meta);
     const store = tx.objectStore('chunks');
-    for (const chunk of chunks) store.put({ key: rowKey(meta.id, chunk.id), sourceId: meta.id, chunk } satisfies ChunkRow);
+    for (const chunk of chunks)
+      store.put({ key: rowKey(meta.id, chunk.id), sourceId: meta.id, chunk } satisfies ChunkRow);
     await finished(tx);
   }
 

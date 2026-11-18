@@ -23,16 +23,53 @@ import { Chunk } from '../../rag/models';
         <p class="heading">{{ chunk().heading }}</p>
       }
       <pre dir="ltr">{{ chunk().text }}</pre>
-      <a class="btn small" [href]="githubUrl()" target="_blank" rel="noopener noreferrer">{{ 'chat.viewer.github' | t }} ↗</a>
+      <a class="btn small" [href]="githubUrl()" target="_blank" rel="noopener noreferrer"
+        >{{ 'chat.viewer.github' | t }} ↗</a
+      >
     </section>
   `,
   styles: `
-    .viewer { display: grid; gap: .6rem; padding: .9rem; border: 1px solid var(--accent); border-radius: var(--radius); background: var(--surface); }
-    header { display: flex; justify-content: space-between; gap: .5rem; align-items: flex-start; }
-    .title { display: grid; min-inline-size: 0; code { overflow-wrap: anywhere; } }
-    .lines, .heading { color: var(--ink-soft); font-size: .82rem; }
-    pre { margin: 0; max-block-size: 16rem; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; background: var(--surface-sunk); padding: .7rem; border-radius: 8px; font-size: .82rem; }
-    a { justify-self: start; text-decoration: none; }
+    .viewer {
+      display: grid;
+      gap: 0.6rem;
+      padding: 0.9rem;
+      border: 1px solid var(--accent);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+    .title {
+      display: grid;
+      min-inline-size: 0;
+      code {
+        overflow-wrap: anywhere;
+      }
+    }
+    .lines,
+    .heading {
+      color: var(--ink-soft);
+      font-size: 0.82rem;
+    }
+    pre {
+      margin: 0;
+      max-block-size: 16rem;
+      overflow: auto;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      background: var(--surface-sunk);
+      padding: 0.7rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+    }
+    a {
+      justify-self: start;
+      text-decoration: none;
+    }
   `,
 })
 export class SourceViewerComponent {

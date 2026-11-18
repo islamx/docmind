@@ -25,7 +25,9 @@ describe('MarkdownPipe', () => {
   template: `<div [innerHTML]="text() | markdown: 2" (appCiteClick)="cited.push($event)"></div>`,
 })
 class MarkdownHost {
-  text = signal('Answer [2] <img src=x onerror="window.__xss=1"> <script>window.__xss=1</script> [link](javascript:alert(1))');
+  text = signal(
+    'Answer [2] <img src=x onerror="window.__xss=1"> <script>window.__xss=1</script> [link](javascript:alert(1))',
+  );
   cited: number[] = [];
 }
 
@@ -47,14 +49,19 @@ describe('markdown rendering safety and citation clicks', () => {
     const root = fixture.nativeElement as HTMLElement;
 
     root.querySelector<HTMLAnchorElement>('a[href="#cite-2"]')!.click();
-    root.querySelector<HTMLAnchorElement>('a[href="https://example.com"]')!.addEventListener('click', (e) => e.preventDefault());
+    root
+      .querySelector<HTMLAnchorElement>('a[href="https://example.com"]')!
+      .addEventListener('click', (e) => e.preventDefault());
     root.querySelector<HTMLAnchorElement>('a[href="https://example.com"]')!.click();
 
     expect(fixture.componentInstance.cited).toEqual([2]);
   });
 });
 
-@Component({ imports: [FocusShortcutDirective], template: `<textarea appFocusShortcut="/"></textarea><input id="other" />` })
+@Component({
+  imports: [FocusShortcutDirective],
+  template: `<textarea appFocusShortcut="/"></textarea><input id="other" />`,
+})
 class FocusHost {}
 
 describe('FocusShortcutDirective', () => {

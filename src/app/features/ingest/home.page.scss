@@ -1,15 +1,89 @@
-.page { inline-size: min(44rem, 100%); margin-inline: auto; padding: clamp(1.5rem, 6vw, 4rem) 1rem 3rem; display: grid; gap: 2rem; }
-.hero { display: grid; gap: 1rem; }
-h1 { font-size: clamp(2rem, 6vw, 3.1rem); line-height: 1.1; letter-spacing: -.025em; font-weight: 700; }
-.lead { color: var(--ink-soft); font-size: 1.1rem; max-inline-size: 34rem; }
-.form { display: grid; gap: .5rem; margin-block-start: .5rem; }
-.label { font-weight: 600; font-size: .9rem; }
-.row { display: flex; gap: .5rem; }
-.input { flex: 1; min-inline-size: 0; padding: .7rem .9rem; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); color: var(--ink); font: inherit; font-family: var(--font-mono); font-size: .92rem; &:focus { outline: 2px solid var(--accent); outline-offset: 1px; } &[aria-invalid='true'] { border-color: var(--danger); } }
-.hint { color: var(--ink-soft); font-size: .88rem; }
-.error { color: var(--danger); font-size: .9rem; }
-.banner { padding: .75rem 1rem; border: 1px solid var(--danger); border-radius: var(--radius); background: var(--surface); }
-.examples { display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; }
-.library { display: grid; gap: .8rem; h2 { font-size: 1.05rem; } }
-.privacy { text-align: center; }
-@media (max-width: 30rem) { .row { flex-direction: column; } }
+.page {
+  inline-size: min(44rem, 100%);
+  margin-inline: auto;
+  padding: clamp(1.5rem, 6vw, 4rem) 1rem 3rem;
+  display: grid;
+  gap: 2rem;
+}
+.hero {
+  display: grid;
+  gap: 1rem;
+}
+h1 {
+  font-size: clamp(2rem, 6vw, 3.1rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+}
+.lead {
+  color: var(--ink-soft);
+  font-size: 1.1rem;
+  max-inline-size: 34rem;
+}
+.form {
+  display: grid;
+  gap: 0.5rem;
+  margin-block-start: 0.5rem;
+}
+.label {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.row {
+  display: flex;
+  gap: 0.5rem;
+}
+.input {
+  flex: 1;
+  min-inline-size: 0;
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  &:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+  &[aria-invalid='true'] {
+    border-color: var(--danger);
+  }
+}
+.hint {
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+.error {
+  color: var(--danger);
+  font-size: 0.9rem;
+}
+.banner {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--danger);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.examples {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.library {
+  display: grid;
+  gap: 0.8rem;
+  h2 {
+    font-size: 1.05rem;
+  }
+}
+.privacy {
+  text-align: center;
+}
+@media (max-width: 30rem) {
+  .row {
+    flex-direction: column;
+  }
+}

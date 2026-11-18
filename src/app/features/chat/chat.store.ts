@@ -1,7 +1,20 @@
 import { computed, inject } from '@angular/core';
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { EMPTY, Observable, Subject, catchError, concat, defer, finalize, from, pipe, switchMap, takeUntil, tap } from 'rxjs';
+import {
+  EMPTY,
+  Observable,
+  Subject,
+  catchError,
+  concat,
+  defer,
+  finalize,
+  from,
+  pipe,
+  switchMap,
+  takeUntil,
+  tap,
+} from 'rxjs';
 import { APP_SETTINGS } from '../../core/config/app-settings';
 import { SearchIndexService } from '../../core/search/search-index.service';
 import { toCitations } from '../../rag/citations';
@@ -62,7 +75,9 @@ export const ChatStore = signalStore(
       patchState(store, (s) => ({ messages: s.messages.map((m) => (m.id === id ? { ...m, ...patch } : m)) }));
 
     const appendToken = (id: number, token: string) =>
-      patchState(store, (s) => ({ messages: s.messages.map((m) => (m.id === id ? { ...m, text: m.text + token } : m)) }));
+      patchState(store, (s) => ({
+        messages: s.messages.map((m) => (m.id === id ? { ...m, text: m.text + token } : m)),
+      }));
 
     const find = (id: number) => store.messages().find((m) => m.id === id);
 
@@ -80,7 +95,11 @@ export const ChatStore = signalStore(
       patchState(store, (s) => ({
         phase: 'retrieving' as ChatPhase,
         nextId: s.nextId + 2,
-        messages: [...s.messages, message(userId, 'user', question, 'done'), message(answerId, 'assistant', '', 'streaming')],
+        messages: [
+          ...s.messages,
+          message(userId, 'user', question, 'done'),
+          message(answerId, 'assistant', '', 'streaming'),
+        ],
       }));
 
       const fallback = (citations: readonly Citation[], reason: ChatFailure) =>

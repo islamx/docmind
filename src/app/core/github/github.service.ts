@@ -42,10 +42,12 @@ export class GithubService {
     return from(files).pipe(
       mergeMap(
         (file) =>
-          this.http.get(`${rawBase}/${ref.owner}/${ref.repo}/HEAD/${encodeURI(file.path)}`, { responseType: 'text' }).pipe(
-            map((text): SourceDoc => ({ path: file.path, text })),
-            catchError(() => EMPTY),
-          ),
+          this.http
+            .get(`${rawBase}/${ref.owner}/${ref.repo}/HEAD/${encodeURI(file.path)}`, { responseType: 'text' })
+            .pipe(
+              map((text): SourceDoc => ({ path: file.path, text })),
+              catchError(() => EMPTY),
+            ),
         downloadConcurrency,
       ),
     );

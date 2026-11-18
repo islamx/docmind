@@ -29,9 +29,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": ["src/styles.scss"],
             "webWorkerTsConfig": "tsconfig.worker.json"
           },
           "configurations": {
@@ -73,10 +71,7 @@
         "test": {
           "builder": "@angular/build:unit-test",
           "options": {
-            "include": [
-              "src/**/*.spec.ts",
-              "api/**/*.spec.ts"
-            ]
+            "include": ["src/**/*.spec.ts"]
           }
         }
       }

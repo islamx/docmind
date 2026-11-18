@@ -10,8 +10,14 @@ import { repoValidator } from './repo.validator';
 import { SourceListComponent } from './source-list.component';
 
 export const EXAMPLES = [
-  { label: 'Angular: Signals guide', value: 'https://github.com/angular/angular/tree/main/adev/src/content/guide/signals' },
-  { label: 'NgRx: SignalStore docs', value: 'https://github.com/ngrx/platform/tree/main/projects/www/src/app/pages/guide/signals' },
+  {
+    label: 'Angular: Signals guide',
+    value: 'https://github.com/angular/angular/tree/main/adev/src/content/guide/signals',
+  },
+  {
+    label: 'NgRx: SignalStore docs',
+    value: 'https://github.com/ngrx/platform/tree/main/projects/www/src/app/pages/guide/signals',
+  },
   { label: 'DocMind: its own docs', value: 'https://github.com/islamx/docmind/tree/main/docs' },
 ] as const;
 

@@ -39,7 +39,9 @@ describe('citations', () => {
     expect(citedNumbers('Use A [2] and B [1], again [2], bogus [9]', 3)).toEqual([2, 1]);
   });
   it('linkifies only valid markers and not existing links', () => {
-    expect(linkifyCitations('see [1] and [7] and [x](http://a)', 3)).toBe('see [\\[1\\]](#cite-1) and [7] and [x](http://a)');
+    expect(linkifyCitations('see [1] and [7] and [x](http://a)', 3)).toBe(
+      'see [\\[1\\]](#cite-1) and [7] and [x](http://a)',
+    );
   });
   it('parses cite hrefs', () => {
     expect(parseCiteHref('#cite-3')).toBe(3);
@@ -88,7 +90,11 @@ describe('sse', () => {
 describe('github helpers', () => {
   it('parses owner/repo, URLs and tree URLs', () => {
     expect(parseRepoInput('angular/angular')).toEqual({ owner: 'angular', repo: 'angular', path: '' });
-    expect(parseRepoInput('https://github.com/ngrx/platform.git')).toEqual({ owner: 'ngrx', repo: 'platform', path: '' });
+    expect(parseRepoInput('https://github.com/ngrx/platform.git')).toEqual({
+      owner: 'ngrx',
+      repo: 'platform',
+      path: '',
+    });
     expect(parseRepoInput('https://github.com/angular/angular/tree/main/adev/src/content/guide/')).toEqual({
       owner: 'angular',
       repo: 'angular',

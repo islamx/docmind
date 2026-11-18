@@ -1,11 +1,5 @@
 export type AppErrorCode =
-  | 'github_rate_limit'
-  | 'repo_not_found'
-  | 'repo_empty'
-  | 'network'
-  | 'embedding_unavailable'
-  | 'storage'
-  | 'unknown';
+  'github_rate_limit' | 'repo_not_found' | 'repo_empty' | 'network' | 'embedding_unavailable' | 'storage' | 'unknown';
 
 /** Domain error with a stable code the UI can translate. */
 export class AppError extends Error {

@@ -6,7 +6,12 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test --watch=false",
+    "test:api": "vitest run -c vitest.api.config.ts",
+    "test:all": "npm test && npm run test:api",
+    "typecheck": "tsc -p tsconfig.api.json",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "private": true,
   "packageManager": "npm@10.9.3",

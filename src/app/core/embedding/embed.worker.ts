@@ -45,7 +45,10 @@ addEventListener('message', async ({ data }: MessageEvent<WorkerRequest>) => {
     const output = await extractor([...data.texts], { pooling: 'mean', normalize: true });
     const dim = output.dims[output.dims.length - 1];
     const vectors = data.texts.map((_, i) => output.data.slice(i * dim, (i + 1) * dim));
-    post({ type: 'result', id: data.id, vectors }, vectors.map((v) => v.buffer));
+    post(
+      { type: 'result', id: data.id, vectors },
+      vectors.map((v) => v.buffer),
+    );
   } catch (error) {
     extractorPromise = undefined; // allow a retry on the next request
     post({ type: 'error', id: data.id, message: error instanceof Error ? error.message : String(error) });

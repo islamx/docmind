@@ -30,7 +30,9 @@ export const IngestStore = signalStore(
     canChat: computed(() => meta() !== null),
     isFinished: computed(() => phase() === 'done'),
     /** 0..1 within the current phase, or null when the phase has no countable progress. */
-    fraction: computed(() => (total() > 0 && (phase() === 'downloading' || phase() === 'embedding') ? done() / total() : null)),
+    fraction: computed(() =>
+      total() > 0 && (phase() === 'downloading' || phase() === 'embedding') ? done() / total() : null,
+    ),
   })),
   withMethods((store, ingestion = inject(IngestionService), library = inject(LibraryStore)) => {
     const cancel$ = new Subject<void>();

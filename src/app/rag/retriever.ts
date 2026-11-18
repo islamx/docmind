@@ -21,9 +21,7 @@ export class HybridRetriever {
   ) {
     for (const chunk of chunks) this.byId.set(chunk.id, chunk);
     // Heading and path carry signal for docs, so they are indexed with the body.
-    this.bm25 = new Bm25Index(
-      chunks.map((c) => ({ id: c.id, tokens: tokenize(`${c.heading} ${c.path} ${c.text}`) })),
-    );
+    this.bm25 = new Bm25Index(chunks.map((c) => ({ id: c.id, tokens: tokenize(`${c.heading} ${c.path} ${c.text}`) })));
   }
 
   get hasVectors(): boolean {

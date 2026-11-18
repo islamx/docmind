@@ -1,6 +1,8 @@
 <div class="layout">
   <aside class="rail" [attr.aria-label]="'chat.files' | t">
-    <h2>{{ 'chat.files' | t }} <span class="count">{{ files().length }}</span></h2>
+    <h2>
+      {{ 'chat.files' | t }} <span class="count">{{ files().length }}</span>
+    </h2>
     <app-file-list [paths]="files()" (picked)="openFile($event)" />
   </aside>
 
@@ -68,7 +70,12 @@
       <ol class="cites">
         @for (c of chat.latestCitations(); track c.n) {
           <li>
-            <button type="button" class="cite" [class.active]="selected()?.id === c.chunk.id" (click)="selected.set(c.chunk)">
+            <button
+              type="button"
+              class="cite"
+              [class.active]="selected()?.id === c.chunk.id"
+              (click)="selected.set(c.chunk)"
+            >
               <span class="n">{{ c.n }}</span>
               <span class="body">
                 <span class="path">{{ c.chunk.path }}</span>

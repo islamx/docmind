@@ -20,7 +20,9 @@ export class MessageComponent {
   protected readonly copied = signal(false);
 
   protected readonly isAssistant = computed(() => this.message().role === 'assistant');
-  protected readonly waiting = computed(() => this.isAssistant() && !this.message().text && this.message().status === 'streaming');
+  protected readonly waiting = computed(
+    () => this.isAssistant() && !this.message().text && this.message().status === 'streaming',
+  );
   protected readonly confidenceKey = computed<TranslationKey | null>(() => {
     const c = this.message().confidence;
     return c ? (`chat.confidence.${c}` as TranslationKey) : null;

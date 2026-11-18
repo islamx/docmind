@@ -63,7 +63,10 @@ describe('vector helpers', () => {
 
 describe('reciprocalRankFusion', () => {
   it('rewards items that appear in both lists', () => {
-    const fused = reciprocalRankFusion([['a', 'b', 'c'], ['c', 'a']]);
+    const fused = reciprocalRankFusion([
+      ['a', 'b', 'c'],
+      ['c', 'a'],
+    ]);
     expect(fused.map((f) => f.id)).toEqual(['a', 'c', 'b']);
   });
   it('is stable for ties', () => {

@@ -81,4 +81,3 @@ describe('HomePage', () => {
     expect(render().el.textContent).toContain('Nothing indexed yet.');
   });
 });
-

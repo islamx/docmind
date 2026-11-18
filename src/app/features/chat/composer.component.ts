@@ -26,8 +26,31 @@ import { FocusShortcutDirective } from '../../shared/focus-shortcut.directive';
     </form>
   `,
   styles: `
-    .composer { display: flex; gap: .5rem; align-items: flex-end; padding: .6rem; border: 1px solid var(--border); background: var(--surface); border-radius: var(--radius-lg); &:focus-within { border-color: var(--accent); } }
-    textarea { flex: 1; min-inline-size: 0; resize: none; border: 0; outline: 0; background: transparent; color: var(--ink); font: inherit; max-block-size: 9rem; field-sizing: content; padding: .35rem .4rem; }
+    .composer {
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-end;
+      padding: 0.6rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      &:focus-within {
+        border-color: var(--accent);
+      }
+    }
+    textarea {
+      flex: 1;
+      min-inline-size: 0;
+      resize: none;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--ink);
+      font: inherit;
+      max-block-size: 9rem;
+      field-sizing: content;
+      padding: 0.35rem 0.4rem;
+    }
   `,
 })
 export class ComposerComponent {

@@ -15,7 +15,10 @@ const REPO_PATTERN =
 
 /** Accepts `owner/repo`, a repo URL, or a `/tree/<branch>/<folder>` URL. */
 export function parseRepoInput(input: string): RepoRef | null {
-  const value = input.trim().replace(/\/+$/, '').replace(/\.git$/, '');
+  const value = input
+    .trim()
+    .replace(/\/+$/, '')
+    .replace(/\.git$/, '');
   const match = REPO_PATTERN.exec(value);
   if (!match) return null;
   return { owner: match[1], repo: match[2], path: (match[3] ?? '').replace(/^\/+|\/+$/g, '') };

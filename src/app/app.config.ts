@@ -1,6 +1,12 @@
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { ApplicationConfig, ErrorHandler, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { PreloadAllModules, provideRouter, withComponentInputBinding, withPreloading, withViewTransitions } from '@angular/router';
+import {
+  PreloadAllModules,
+  provideRouter,
+  withComponentInputBinding,
+  withPreloading,
+  withViewTransitions,
+} from '@angular/router';
 import { provideEmbedder } from './core/embedding/provide-embedder';
 import { GlobalErrorHandler } from './core/errors/global-error-handler';
 import { githubErrorInterceptor, retryInterceptor } from './core/http/interceptors';

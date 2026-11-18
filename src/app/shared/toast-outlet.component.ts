@@ -11,7 +11,12 @@ import { TranslatePipe } from '../core/i18n/translate.pipe';
       @for (toast of notifications.toasts(); track toast.id) {
         <div class="toast" [class]="'toast ' + toast.kind">
           <span>{{ toast.text }}</span>
-          <button type="button" class="icon-btn" [attr.aria-label]="'toast.dismiss' | t" (click)="notifications.dismiss(toast.id)">
+          <button
+            type="button"
+            class="icon-btn"
+            [attr.aria-label]="'toast.dismiss' | t"
+            (click)="notifications.dismiss(toast.id)"
+          >
             ×
           </button>
         </div>
@@ -19,10 +24,38 @@ import { TranslatePipe } from '../core/i18n/translate.pipe';
     </div>
   `,
   styles: `
-    .toasts { position: fixed; inset-block-end: 1rem; inset-inline-end: 1rem; display: grid; gap: .5rem; z-index: 50; max-inline-size: min(26rem, calc(100vw - 2rem)); }
-    .toast { display: flex; gap: .75rem; align-items: center; justify-content: space-between; padding: .7rem .9rem; border-radius: var(--radius); background: var(--surface-raised); border: 1px solid var(--border); box-shadow: var(--shadow); font-size: .9rem; }
-    .toast.error { border-color: var(--danger); }
-    .icon-btn { background: none; border: 0; color: inherit; font-size: 1.2rem; cursor: pointer; line-height: 1; }
+    .toasts {
+      position: fixed;
+      inset-block-end: 1rem;
+      inset-inline-end: 1rem;
+      display: grid;
+      gap: 0.5rem;
+      z-index: 50;
+      max-inline-size: min(26rem, calc(100vw - 2rem));
+    }
+    .toast {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 0.9rem;
+      border-radius: var(--radius);
+      background: var(--surface-raised);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      font-size: 0.9rem;
+    }
+    .toast.error {
+      border-color: var(--danger);
+    }
+    .icon-btn {
+      background: none;
+      border: 0;
+      color: inherit;
+      font-size: 1.2rem;
+      cursor: pointer;
+      line-height: 1;
+    }
   `,
 })
 export class ToastOutletComponent {

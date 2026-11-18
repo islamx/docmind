@@ -135,7 +135,10 @@ describe('sourceResolver', () => {
   };
   const route = (path?: string) =>
     ({
-      paramMap: new Map([['owner', 'a'], ['repo', 'b']]) as unknown as ActivatedRouteSnapshot['paramMap'],
+      paramMap: new Map([
+        ['owner', 'a'],
+        ['repo', 'b'],
+      ]) as unknown as ActivatedRouteSnapshot['paramMap'],
       queryParamMap: { get: () => path ?? null } as unknown as ActivatedRouteSnapshot['queryParamMap'],
     }) as ActivatedRouteSnapshot;
 

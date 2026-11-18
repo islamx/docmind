@@ -105,4 +105,3 @@ export class ChatPage {
     if (first) this.selected.set(first);
   }
 }
-
