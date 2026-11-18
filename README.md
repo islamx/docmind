@@ -8,6 +8,10 @@ Indexing and search run in your browser. Only answer generation calls a server, 
 
 A proof of concept built to show production-grade Angular: a real RAG pipeline on free resources, not a todo list.
 
+![DocMind workflow: index a GitHub repo in the browser, then ask and get cited answers (Arabic diagram)](docs/img/docmind-explain.png)
+
+_The core concept at a glance (Arabic): five indexing steps, then retrieve, generate and show the answer with sources._
+
 ## What it does
 
 1. Paste `owner/repo` or a GitHub folder URL.
