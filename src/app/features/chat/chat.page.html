@@ -33,7 +33,7 @@
       </button>
     </header>
 
-    <div class="log" role="log" aria-live="polite" aria-relevant="additions text">
+    <div #log class="log" role="log" aria-live="polite" aria-relevant="additions text">
       @if (!chat.hasMessages()) {
         <div class="empty">
           <h2>{{ 'chat.empty.title' | t: { name: displayName() } }}</h2>

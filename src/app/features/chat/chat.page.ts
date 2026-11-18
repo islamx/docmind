@@ -1,6 +1,8 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import {
+  afterRenderEffect,
   ChangeDetectionStrategy,
+  ElementRef,
   Component,
   computed,
   effect,
@@ -10,6 +12,7 @@ import {
   resource,
   signal,
   untracked,
+  viewChild,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Embedder } from '../../core/embedding/embedder';
@@ -48,6 +51,7 @@ export class ChatPage {
   protected readonly draft = signal('');
   protected readonly examples = EXAMPLE_KEYS;
   protected readonly showPanel = signal(false);
+  private readonly log = viewChild<ElementRef<HTMLElement>>('log');
   /** Short display name: the folder when a sub-path was indexed, else the repo. */
   protected readonly displayName = computed(() => this.source().path.split('/').pop() || this.source().repo);
 
@@ -78,6 +82,15 @@ export class ChatPage {
   });
 
   constructor() {
+    // Keep the newest message in view while it streams, unless the user scrolled up to read.
+    afterRenderEffect(() => {
+      this.chat.messages();
+      const el = this.log()?.nativeElement;
+      if (!el) return;
+      const nearBottom = el.scrollHeight - el.scrollTop - el.clientHeight < 160;
+      if (nearBottom || this.chat.phase() === 'retrieving') el.scrollTo({ top: el.scrollHeight });
+    });
+
     effect(() => this.chat.open(this.source().id));
 
     // Screen readers hear progress without focus moving away from the input.

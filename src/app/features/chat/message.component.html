@@ -3,7 +3,10 @@
     <p class="user-text" dir="auto">{{ message().text }}</p>
   } @else {
     @if (waiting()) {
-      <p class="muted pulse">{{ 'chat.retrieving' | t }}</p>
+      <div class="thinking" role="status">
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="visually-hidden">{{ 'chat.retrieving' | t }}</span>
+      </div>
     }
 
     @if (message().text) {
